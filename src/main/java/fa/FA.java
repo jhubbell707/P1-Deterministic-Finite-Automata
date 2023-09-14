@@ -38,6 +38,10 @@ public class FA implements FAInterface {
 
     @Override
     public boolean setStart(String name) {
+        for(State s : Q) if(s.getName().equals(name)) {
+            q0 = s;
+            return true;
+        }
         return false;
     }
 
@@ -58,16 +62,19 @@ public class FA implements FAInterface {
 
     @Override
     public State getState(String name) {
+        for(State s : Q) if(s.getName().equals(name)) return s;
         return null;
     }
 
     @Override
     public boolean isFinal(String name) {
+        for(State s : F) if(s.getName().equals(name)) return true;
         return false;
     }
 
     @Override
     public boolean isStart(String name) {
+        if(q0.getName().equals(name)) return true;
         return false;
     }
 }
