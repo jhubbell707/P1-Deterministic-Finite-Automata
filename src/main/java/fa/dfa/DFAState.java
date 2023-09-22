@@ -2,6 +2,12 @@ package fa.dfa;
 
 import fa.State;
 
+/**
+ * Extension of abstract class State.
+ * 
+ * @author jimmyhubbell
+ * @version Fall 2023
+ */
 public class DFAState extends State {
 
     public DFAState(String name) {

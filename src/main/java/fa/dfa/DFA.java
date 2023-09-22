@@ -3,12 +3,18 @@ package fa.dfa;
 import fa.State;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class DFA implements  DFAInterface{
+/**
+ * Class responsible for handling states, transitions, and seeing if a 
+ * given string is accepted.
+ * 
+ * @author jimmyhubbell
+ * @version Fall 2023
+ */
+public class DFA implements DFAInterface{
 
     private Set<State> Q = new HashSet<State>();
     private Set<Character> Sigma = new HashSet<Character>();
@@ -60,7 +66,24 @@ public class DFA implements  DFAInterface{
 
     @Override
     public boolean accepts(String s) {
-        return false;
+        State pointer = q0;
+
+        for(char c : s.toCharArray()) {
+            int fail = 1;
+            for(Transition transition : Delta) {
+                if(transition.getSourceState().equals(pointer) && transition.getSign() == c) {
+                    // character accepted
+                    pointer = transition.getTargetState();
+                    fail = 0;
+                }
+            }
+
+            // character denied
+            if(fail == 1) return false;
+        }
+
+        // string accepted
+        return true;
     }
 
     @Override
@@ -92,7 +115,7 @@ public class DFA implements  DFAInterface{
         State target = getState(toState);
         if(source == null || target == null) return false;
 
-        Transition transition = new Transition(source, target);
+        Transition transition = new Transition(source, target, onSymb);
         Delta.add(transition);
 
         return true;
