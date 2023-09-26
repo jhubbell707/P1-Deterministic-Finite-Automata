@@ -1,6 +1,6 @@
 # Project 1: Deterministic Finite Automata
 
-* Authors: Jimmy Hubbell & Jered Fennell
+* Authors: Jimmy Hubbell
 * Class: CS361
 * Semester: Fall 2023
 

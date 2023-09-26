@@ -10,7 +10,6 @@ import java.util.Set;
  * given string is accepted.
  * 
  * @author jimmyhubbell 
- * @author jeredfennell
  * 
  * @version Fall 2023
  */

@@ -8,7 +8,6 @@ import fa.State;
  * Extension of abstract class State.
  * 
  * @author jimmyhubbell
- * @author jeredfennell
  * 
  * @version Fall 2023
  */
