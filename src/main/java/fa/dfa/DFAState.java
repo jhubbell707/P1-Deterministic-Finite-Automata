@@ -1,5 +1,7 @@
 package fa.dfa;
 
+import java.util.HashMap;
+
 import fa.State;
 
 /**
@@ -9,6 +11,8 @@ import fa.State;
  * @version Fall 2023
  */
 public class DFAState extends State {
+
+    private HashMap<Character, String> transitions = new HashMap<>();
 
     public DFAState(String name) {
         super(name);
@@ -22,6 +26,16 @@ public class DFAState extends State {
     @Override
     public String toString() {
         return super.toString();
+    }
+
+    @Override
+    public void addTransition(char sign, String state) {
+        transitions.put(sign, state);
+    }
+
+    @Override
+    public String getTransition(char sign) {
+        return transitions.get(sign);
     }
     
 }

@@ -2,9 +2,7 @@ package fa.dfa;
 
 import fa.State;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -20,7 +18,6 @@ public class DFA implements DFAInterface{
     private Set<Character> Sigma = new HashSet<Character>();
     private State q0;
     private Set<State> F = new HashSet<State>();
-    private List<Transition> Delta = new ArrayList<Transition>();
 
     @Override
     public boolean addState(String name) {
@@ -69,21 +66,12 @@ public class DFA implements DFAInterface{
         State pointer = q0;
 
         for(char c : s.toCharArray()) {
-            int fail = 1;
-            for(Transition transition : Delta) {
-                if(transition.getSourceState().equals(pointer) && transition.getSign() == c) {
-                    // character accepted
-                    pointer = transition.getTargetState();
-                    fail = 0;
-                }
-            }
-
-            // character denied
-            if(fail == 1) return false;
+            String str = pointer.getTransition(c);
+            if(str == null) return false;
+            pointer = getState(str);
         }
 
-        // string accepted
-        return true;
+        return F.contains(pointer);
     }
 
     @Override
@@ -113,11 +101,9 @@ public class DFA implements DFAInterface{
     public boolean addTransition(String fromState, String toState, char onSymb) {
         State source = getState(fromState);
         State target = getState(toState);
-        if(source == null || target == null) return false;
+        if(source == null || target == null || !Sigma.contains(onSymb)) return false;
 
-        Transition transition = new Transition(source, target, onSymb);
-        Delta.add(transition);
-
+        source.addTransition(onSymb, toState);
         return true;
     }
 

@@ -1,10 +1,10 @@
 package test.dfa;
 
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Set;
 
-import org.junit.Test;
 
 import fa.dfa.DFA;
 
@@ -36,6 +36,31 @@ public class DFATest {
 		assertFalse(dfa.addTransition("a", "b", '2'));
 		
 		return dfa;
+	}
+
+	@Test
+	public void test0_1() {
+		DFA dfa = new DFA();
+		dfa.addSigma('0');
+		dfa.addSigma('1');
+		
+		assertTrue(dfa.addState("a"));
+		assertTrue(dfa.addState("b"));
+		assertTrue(dfa.setStart("a"));
+		assertTrue(dfa.setFinal("b"));
+
+		assertFalse(dfa.addState("a"));
+		assertFalse(dfa.setStart("c"));
+		assertFalse(dfa.setFinal("c"));
+
+		assertTrue(dfa.addTransition("a", "a", '0'));
+		assertTrue(dfa.addTransition("a", "b", '1'));
+		assertTrue(dfa.addTransition("b", "a", '0'));
+		assertTrue(dfa.addTransition("b", "b", '1'));
+
+		assertFalse(dfa.addTransition("c", "b", '1'));
+		assertFalse(dfa.addTransition("a", "c", '1'));
+		assertFalse(dfa.addTransition("a", "b", '2'));
 	}
 	
 	@Test
