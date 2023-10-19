@@ -30,16 +30,10 @@ public abstract class State {
 	public String getName(){
 		return name;
 	}
-
-
-	public void addTransition(char sign, String state) {}
-
-	public String getTransition(char sign) { return null; }
 	
 	@Override
 	public String toString(){
 		return name;
 	}
-	
 	
 }

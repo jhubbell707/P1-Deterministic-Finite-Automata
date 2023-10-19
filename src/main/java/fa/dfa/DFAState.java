@@ -29,12 +29,10 @@ public class DFAState extends State {
         return super.toString();
     }
 
-    @Override
     public void addTransition(char sign, String state) {
         transitions.put(sign, state);
     }
 
-    @Override
     public String getTransition(char sign) {
         return transitions.get(sign);
     }
